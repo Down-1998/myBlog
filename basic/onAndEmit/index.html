@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue中使用 $emit、$on(eventName) | 瓜皮伦前端之旅</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/myBlog/assets/css/0.styles.40abc9cc.css" as="style"><link rel="preload" href="/myBlog/assets/js/app.fc8aaca0.js" as="script"><link rel="preload" href="/myBlog/assets/js/2.adb8f932.js" as="script"><link rel="preload" href="/myBlog/assets/js/10.4d3def68.js" as="script"><link rel="prefetch" href="/myBlog/assets/js/11.4f1916b4.js"><link rel="prefetch" href="/myBlog/assets/js/12.e510eb90.js"><link rel="prefetch" href="/myBlog/assets/js/13.09727da9.js"><link rel="prefetch" href="/myBlog/assets/js/14.7eb4da1b.js"><link rel="prefetch" href="/myBlog/assets/js/15.e1012694.js"><link rel="prefetch" href="/myBlog/assets/js/16.f5bd2548.js"><link rel="prefetch" href="/myBlog/assets/js/17.aeb64fd0.js"><link rel="prefetch" href="/myBlog/assets/js/18.0ad35386.js"><link rel="prefetch" href="/myBlog/assets/js/19.f4aaf826.js"><link rel="prefetch" href="/myBlog/assets/js/20.44c40c8a.js"><link rel="prefetch" href="/myBlog/assets/js/3.1cd0f6c6.js"><link rel="prefetch" href="/myBlog/assets/js/4.f7478058.js"><link rel="prefetch" href="/myBlog/assets/js/5.771aaea5.js"><link rel="prefetch" href="/myBlog/assets/js/6.a5fb572d.js"><link rel="prefetch" href="/myBlog/assets/js/7.0f5a4226.js"><link rel="prefetch" href="/myBlog/assets/js/8.d0e97708.js"><link rel="prefetch" href="/myBlog/assets/js/9.0a4e49b0.js">
+    <link rel="stylesheet" href="/myBlog/assets/css/0.styles.40abc9cc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/myBlog/" class="home-link router-link-active"><!----> <span class="site-name">瓜皮伦前端之旅</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/myBlog/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/myBlog/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/myBlog/basic/" class="nav-link router-link-active">
+  Vue
+</a></div><div class="nav-item"><a href="/myBlog/reactbase/" class="nav-link">
+  React
+</a></div><div class="nav-item"><a href="/myBlog/nodebase/" class="nav-link">
+  Node.js
+</a></div><div class="nav-item"><a href="/myBlog/algorithm/" class="nav-link">
+  算法题库
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_39341415?spm=1000.2115.3001.5343" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/Down-1998" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/myBlog/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/myBlog/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/myBlog/basic/" class="nav-link router-link-active">
+  Vue
+</a></div><div class="nav-item"><a href="/myBlog/reactbase/" class="nav-link">
+  React
+</a></div><div class="nav-item"><a href="/myBlog/nodebase/" class="nav-link">
+  Node.js
+</a></div><div class="nav-item"><a href="/myBlog/algorithm/" class="nav-link">
+  算法题库
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_39341415?spm=1000.2115.3001.5343" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/Down-1998" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/myBlog/basic/vuebasic/" class="sidebar-link">vue2.0知识点总结</a></li><li><a href="/myBlog/basic/onAndEmit/" aria-current="page" class="active sidebar-link">vue中使用 $emit、$on(eventName)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/myBlog/basic/onAndEmit/#vue中使用-emit、-on-eventname" class="sidebar-link">vue中使用 $emit、$on(eventName)</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="vue中使用-emit、-on-eventname"><a href="#vue中使用-emit、-on-eventname" class="header-anchor">#</a> vue中使用 $emit、$on(eventName)</h2> <div class="language- extra-class"><pre><code> $emit(eventName)触发当前实例上的事件，附加参数都会传给监听器回调。
+
+ $on(eventName) 监听当前实例上的自定义事件。事件可以由 vm.$emit 触发。回调函数会接收所有传入事件触发函数的额外参数。
+</code></pre></div><p>下面通过几个实例来演示一下怎么使用</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>section<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>left<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>button type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> @click<span class="token operator">=</span><span class="token string">&quot;isClick&quot;</span><span class="token operator">&gt;</span>点击<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token function">isClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token string">'点击事件！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><p>以上代码，是通过按钮的点击事件，然后this.$emit传递事件，然后this.$on捕获本页面的事件
+<img src="https://img-blog.csdnimg.cn/b777f1d30f3c41f8a1c8d04f18c29099.png" alt="在这里插入图片描述"></p> <p>实例2 本页面多个事件</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>section<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>left<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>button type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> @click<span class="token operator">=</span><span class="token string">&quot;isClick&quot;</span><span class="token operator">&gt;</span>点击<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>button type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> @click<span class="token operator">=</span><span class="token string">&quot;isClickOther&quot;</span><span class="token operator">&gt;</span>点击<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token function">isClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token string">'点击事件！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">isClickOther</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'isRight'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'点击1'</span><span class="token punctuation">,</span> <span class="token string">'点击2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'isRight'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token string">'isRight'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">666</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><p>以上例子，是本页面的两个点击事件，可以同时监听两个事件，也可以同时传多个参数</p> <p>实例3  非父子组件传值（通过bus传值）
+子组件1</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>section<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>left<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>button type<span class="token operator">=</span><span class="token string">&quot;primary&quot;</span> @click<span class="token operator">=</span><span class="token string">&quot;isClick&quot;</span><span class="token operator">&gt;</span>点击<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+  <span class="token keyword">import</span> eventBus <span class="token keyword">from</span> <span class="token string">'~/utils/eventBus'</span><span class="token punctuation">;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token function">isClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        eventBus<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token string">'点击事件！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><p>子组件2</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>section<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>right<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> name <span class="token punctuation">}</span><span class="token punctuation">}</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+  <span class="token keyword">import</span> eventBus <span class="token keyword">from</span> <span class="token string">'~/utils/eventBus'</span><span class="token punctuation">;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        name<span class="token operator">:</span> <span class="token string">'right默认值'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      eventBus<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'isLeft'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">info</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> info <span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><p>父组件</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>section<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>row<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>el<span class="token operator">-</span>col <span class="token operator">:</span>span<span class="token operator">=</span><span class="token string">&quot;12&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>left<span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>col<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>el<span class="token operator">-</span>col <span class="token operator">:</span>span<span class="token operator">=</span><span class="token string">&quot;12&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>right <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>col<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>row<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>section<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+  <span class="token keyword">import</span> left <span class="token keyword">from</span> <span class="token string">'~/components/left'</span>
+  <span class="token keyword">import</span> right <span class="token keyword">from</span> <span class="token string">'~/components/right'</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    components<span class="token operator">:</span> <span class="token punctuation">{</span>
+      left<span class="token punctuation">,</span>
+      right
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre></div><p>以上例子就是 left组件传值给bus，然后right组件监听bus的isLest事件，当left组件触发事件的时候，right组件就会触发方法，替换页面的值</p> <p>总结</p> <p>1.使用$emit传递事件</p> <p>2.使用$on监听事件</p> <p>3.可以本页面使用，也可以父子组件使用，也可以非关联组件使用</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/myBlog/basic/vuebasic/" class="prev">
+        vue2.0知识点总结
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/myBlog/assets/js/app.fc8aaca0.js" defer></script><script src="/myBlog/assets/js/2.adb8f932.js" defer></script><script src="/myBlog/assets/js/10.4d3def68.js" defer></script>
+  </body>
+</html>

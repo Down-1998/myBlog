@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React中的render props | 瓜皮伦前端之旅</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/myBlog/assets/css/0.styles.40abc9cc.css" as="style"><link rel="preload" href="/myBlog/assets/js/app.fc8aaca0.js" as="script"><link rel="preload" href="/myBlog/assets/js/2.adb8f932.js" as="script"><link rel="preload" href="/myBlog/assets/js/20.44c40c8a.js" as="script"><link rel="prefetch" href="/myBlog/assets/js/10.4d3def68.js"><link rel="prefetch" href="/myBlog/assets/js/11.4f1916b4.js"><link rel="prefetch" href="/myBlog/assets/js/12.e510eb90.js"><link rel="prefetch" href="/myBlog/assets/js/13.09727da9.js"><link rel="prefetch" href="/myBlog/assets/js/14.7eb4da1b.js"><link rel="prefetch" href="/myBlog/assets/js/15.e1012694.js"><link rel="prefetch" href="/myBlog/assets/js/16.f5bd2548.js"><link rel="prefetch" href="/myBlog/assets/js/17.aeb64fd0.js"><link rel="prefetch" href="/myBlog/assets/js/18.0ad35386.js"><link rel="prefetch" href="/myBlog/assets/js/19.f4aaf826.js"><link rel="prefetch" href="/myBlog/assets/js/3.1cd0f6c6.js"><link rel="prefetch" href="/myBlog/assets/js/4.f7478058.js"><link rel="prefetch" href="/myBlog/assets/js/5.771aaea5.js"><link rel="prefetch" href="/myBlog/assets/js/6.a5fb572d.js"><link rel="prefetch" href="/myBlog/assets/js/7.0f5a4226.js"><link rel="prefetch" href="/myBlog/assets/js/8.d0e97708.js"><link rel="prefetch" href="/myBlog/assets/js/9.0a4e49b0.js">
+    <link rel="stylesheet" href="/myBlog/assets/css/0.styles.40abc9cc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/myBlog/" class="home-link router-link-active"><!----> <span class="site-name">瓜皮伦前端之旅</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/myBlog/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/myBlog/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/myBlog/basic/" class="nav-link">
+  Vue
+</a></div><div class="nav-item"><a href="/myBlog/reactbase/" class="nav-link router-link-active">
+  React
+</a></div><div class="nav-item"><a href="/myBlog/nodebase/" class="nav-link">
+  Node.js
+</a></div><div class="nav-item"><a href="/myBlog/algorithm/" class="nav-link">
+  算法题库
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_39341415?spm=1000.2115.3001.5343" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/Down-1998" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/myBlog/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/myBlog/interview/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/myBlog/basic/" class="nav-link">
+  Vue
+</a></div><div class="nav-item"><a href="/myBlog/reactbase/" class="nav-link router-link-active">
+  React
+</a></div><div class="nav-item"><a href="/myBlog/nodebase/" class="nav-link">
+  Node.js
+</a></div><div class="nav-item"><a href="/myBlog/algorithm/" class="nav-link">
+  算法题库
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/qq_39341415?spm=1000.2115.3001.5343" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/Down-1998" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/myBlog/reactbase/reactProps/" aria-current="page" class="active sidebar-link">React中的render props</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/myBlog/reactbase/reactProps/#关键部分" class="sidebar-link">关键部分</a></li></ul></li><li><a href="/myBlog/reactbase/reactMemo/" class="sidebar-link">使用React.memo()来优化函数组件的性能</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react中的render-props"><a href="#react中的render-props" class="header-anchor">#</a> React中的render props</h1> <p>术语“render prop”是指一种在react组件之间使用一个值为函数的prop共享代码的简单技术。
+具有 render prop 的组件接受一个函数，该函数返回一个 React 元素并调用它而不是实现自己的渲染逻辑。</p> <p>我们知道，组件是 React 代码复用的主要单元，但如何分享一个组件封装到其他需要相同 state 组件的状态或行为并不总是很容易。</p> <p>首先，新建一个显示“Hello World”的组件ShowHello.js：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">ShowHello</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greet<span class="token operator">:</span><span class="token string">&quot;Hello World&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> ShowHello
+
+</code></pre></div><p>现在我们有一个组件Page，想要获取组件ShowHello的greet此时的状态（即“Hello World”），我们常规的做法可以是：在ShowHello组件内部的渲染方法渲染 Page组件：</p> <p>Page.js</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">Page</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greet<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>greet     <span class="token comment">//获取父组件（ShowHello）的prop</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>     <span class="token comment">//渲染</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> Page
+</code></pre></div><p>ShowHello.js</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Page <span class="token keyword">from</span> <span class="token string">'./Page'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">ShowHello</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greet<span class="token operator">:</span><span class="token string">&quot;Hello World&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>Page greet<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>     <span class="token comment">//将greet作为prop传给子组件Page</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> ShowHello
+
+</code></pre></div><p>这种方法适用于我们的特定用例，但我们还没有达到以可复用的方式真正封装状态或行为的目标。现在，每当我们想要状态用于不同的用例时，我们必须创建一个新的组件（本质上是另一个ShowHello组件，通过将prop传给另一个子组件），它专门为该用例呈现一些东西。</p> <p>这也是 <strong>render prop</strong>的来历：我们可以提供一个带有函数 prop 的ShowHello组件，它能够动态决定什么需要渲染，而不是将Page组件硬编码到ShowHello组件里，并有效地改变它的渲染结果。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">ShowHello</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greet<span class="token operator">:</span><span class="token string">&quot;Hello World&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">{</span><span class="token comment">/* &lt;Page greet={this.state.greet} /&gt; */</span><span class="token punctuation">}</span>   <span class="token comment">//将prop方式换成render prop的方式</span>
+        <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">)</span><span class="token punctuation">}</span>    <span class="token comment">//不同的组件共享同一个状态，且不需要创建            </span>
+                                                 <span class="token comment">//一个新的ShowHello组件</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> ShowHello
+
+
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ShowHello <span class="token keyword">from</span> <span class="token string">'./ShowHello'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Page <span class="token keyword">from</span> <span class="token string">'./Page'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">Home</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>ShowHello render<span class="token operator">=</span><span class="token punctuation">{</span><span class="token parameter">greet</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>   <span class="token comment">//通过render prop的方式决定哪个组件渲染使用此状态</span>
+          <span class="token operator">&lt;</span>Page greet<span class="token operator">=</span><span class="token punctuation">{</span>greet<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> Home
+
+</code></pre></div><p>现在，我们提供了一个 render 方法，让ShowHello组件能够动态决定什么需要渲染，而不是克隆ShowHello组件然后硬编码来解决特定的用例。如果存在其他组件使用该状态，那么只需要将render中的Page组件改成其他组件即可。</p> <p>更具体地说，render prop 是一个用于告知组件需要渲染什么内容的函数 prop。</p> <p>这项技术使我们共享状态或行为非常容易。要获得这个状态或行为，只要渲染一个带有render prop的组件就能够告诉它当前要渲染什么。</p> <p>render prop并不是react的API，而是一种与高阶组件（HOC）类似的设计模式，ShowHello组件中传递的prop也不一定要是render，也可以是其他标识，如child（或其他自己想要的标识）。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ShowHello <span class="token keyword">from</span> <span class="token string">'./ShowHello'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Page <span class="token keyword">from</span> <span class="token string">'./Page'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">Home</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>ShowHello child<span class="token operator">=</span><span class="token punctuation">{</span><span class="token parameter">greet</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>   <span class="token comment">//prop可以为自己想要的标识，须传入一个函数</span>
+          <span class="token operator">&lt;</span>Page greet<span class="token operator">=</span><span class="token punctuation">{</span>greet<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> Home
+
+</code></pre></div><p>ShowHello内部的prop也相应变化</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name">ShowHello</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greet<span class="token operator">:</span><span class="token string">&quot;Hello World&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span><span class="token function">child</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">)</span><span class="token punctuation">}</span>     <span class="token comment">//prop此时为child，切记此时child为函数</span>
+        <span class="token comment">//上面相当于渲染成 &lt;Page greet={this.state.greet} /&gt; </span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">export</span> <span class="token keyword">default</span> ShowHello
+</code></pre></div><p>更容易理解的一种方式是，你可以认为现在prop传的不是具体某个状态，而是一个函数，函数体是要渲染（或者说使用共享状态）的组件，函数的参数为实际的传入渲染组件的state。</p> <h2 id="关键部分"><a href="#关键部分" class="header-anchor">#</a> 关键部分</h2> <div class="language-javascript extra-class"><pre class="language-javascript"><code>
+<span class="token operator">&lt;</span>ShowHello child<span class="token operator">=</span><span class="token punctuation">{</span><span class="token parameter">greet</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>  <span class="token comment">//prop为一个函数</span>
+  <span class="token operator">&lt;</span>Page greet<span class="token operator">=</span><span class="token punctuation">{</span>greet<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span><span class="token function">child</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greet<span class="token punctuation">)</span><span class="token punctuation">}</span>    <span class="token comment">//为函数传入共享状态</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/myBlog/reactbase/reactMemo/">
+        使用React.memo()来优化函数组件的性能
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/myBlog/assets/js/app.fc8aaca0.js" defer></script><script src="/myBlog/assets/js/2.adb8f932.js" defer></script><script src="/myBlog/assets/js/20.44c40c8a.js" defer></script>
+  </body>
+</html>
